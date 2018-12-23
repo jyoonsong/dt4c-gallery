@@ -1,10 +1,5 @@
-Expandable Project Presentation
+How to check out
 =========
 
-A gallery of project preview images that expand on click to reveal the full case study.
-
-[Article on CodyHouse](http://codyhouse.co/gem/expandable-project-presentation/)
-
-[Demo](http://codyhouse.co/demo/expandable-project-presentation/)
- 
-[Terms](http://codyhouse.co/terms/)
+1. Clone this repo by typing `git clone https://github.com/jyoonsong/expandable-project-presentation.git` into your terminal
+2. Click `index.html` or run `python -m SimpleHTTPServer`
