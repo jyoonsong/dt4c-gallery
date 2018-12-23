@@ -40,7 +40,7 @@ jQuery(document).ready(function($){
 
 			container.removeClass('project-is-open');
 			//fade out project
-			project.animate({opacity: 0}, 800, function(){
+			project.animate({opacity: 0}, 300, function(){
 				project.removeClass('is-loaded');
 				$('.projects-container').find('.cd-scroll').attr('style', '');
 				setTimeout(function(){
@@ -48,7 +48,7 @@ jQuery(document).ready(function($){
 				}, delay);
 				setTimeout(function(){
 					showCaption($('.projects-container li').eq(0));
-				}, 300);
+				}, 200);
 			});		
 		}
 	}

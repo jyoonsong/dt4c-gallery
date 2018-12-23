@@ -1,4 +1,4 @@
-@import 'bourbon'; // http://bourbon.io/
+@import 'bourbon/bourbon'; // http://bourbon.io/
 
 @import '../partials/variables'; // colors, fonts etc...
 
@@ -13,7 +13,7 @@ Primary style
 -------------------------------- */
 
 *, *::after, *::before {
-	@include box-sizing(border-box);
+	box-sizing : border-box;
 }
 
 html {
@@ -61,10 +61,10 @@ Main Components
 		height: 100%/$items;
 	    overflow: hidden;
 		cursor: pointer;
-		@include transition(transform 0.4s);
+		transition : transform 0.4s;
 
 		/* on mobile -  move items outside the viewport */
-		@include transform(translateX(-100%));
+		transform : translateX(-100%);
 
 	    &::after {
 	    	/* background image */
@@ -78,7 +78,7 @@ Main Components
 			background-repeat: no-repeat;
 			background-position: center center;
 			background-size: cover; 
-			@include transition(opacity 0.5s, height 0.4s);
+			transition: opacity 0.5s, height 0.4s;
 	    }
 
 	    &::before {
@@ -125,7 +125,7 @@ Main Components
 
 		&.is-loaded {
 			/* move items in the viewport when background images have been loaded */
-			@include transform(translateX(0));
+			transform: translateX(0);
 		}
 
 		&.is-full-width {
@@ -134,9 +134,10 @@ Main Components
 			height: auto;
 			z-index: 1;
 			cursor: auto;
-			@include transition(z-index 0s 0s, top 0.4s 0s);
+			transition: z-index 0s 0s, top 0.4s 0s;
 
 			&::after {
+				opacity: 1 !important;
 				height: 100vh;
 			}
 		}	
@@ -153,8 +154,8 @@ Main Components
 			width: 100vw/$items;
 			height: 100%;
 			opacity: 0;
-			@include transform(translateX(0));
-			@include transition(width 0s);
+			transform: translateX(0);
+			transition: width 0s;
 
 			&:first-of-type::before {
 				content: 'img/img-1-large.jpg';
@@ -222,7 +223,7 @@ Main Components
 				/* selected item */
 				left: 0vw;
 				width: 100vw;
-				@include transition(width 0.4s 0s, z-index 0s 0s, left 0.4s 0s);
+				transition: width 0.4s 0s, z-index 0s 0s, left 0.4s 0s;
 			}
 		}
 	}
@@ -230,9 +231,8 @@ Main Components
     @include MQ(L) {
 
     	.cd-single-project::after {
-    		background-attachment: fixed;
-			@include transform(scale(1.1));
-			@include transition(transform .8s, opacity .5s);
+			transform: scale(1.1);
+			transition: transform .8s, opacity .5s;
     	}
 
     	.cd-single-project.is-loaded::after {
@@ -240,8 +240,8 @@ Main Components
 		}
 
 	    .no-touch & .cd-single-project:hover::after, .cd-single-project.is-full-width.is-loaded::after {
-	    	opacity: 1;
-	    	@include transform(scale(1));
+	    	opacity: 0.7;
+	    	transform: scale(1);
 	    }
     }
 }
@@ -251,13 +251,13 @@ Main Components
 	z-index: 1;
 	left: 0;
     top: 100vh/($items*2);
-    @include transform(translateY(-50%));
+    transform: translateY(-50%);
     width: 100%;
     text-align: center;
 
     .is-full-width & {
 		top: 50vh;
-		@include transition(opacity 0s, top 0.4s);
+		transition: (opacity 0s, top 0.4s);
 	}
 
 	> * {
@@ -271,7 +271,7 @@ Main Components
 		font-weight: 700;
 	}
 
-	p {
+	p, img {
 		font-size: 1.4rem;
 		font-family: $secondary-font;
 		font-style: italic;
@@ -281,21 +281,25 @@ Main Components
 		opacity: .6;
 	}
 
+	strong {
+		font-weight: 600 !important;
+	}
+
 	@include MQ(M) {
 		top: 50vh;
 		width: 100vw/$items;
 		opacity: 0;
-		@include transform(translateY(-50%) translateX(-20px));
+		transform: translateY(-50%) translateX(-20px);
 
 		.is-loaded & {
 			opacity: 1;
-			@include transform(translateY(-50%));
-			@include transition(transform 0.6s, opacity 0.6s, left 0.4s);
+			transform: translateY(-50%);
+			transition: transform 0.6s, opacity 0.6s, left 0.4s;
 		}
 
 		.is-loaded.is-full-width & {
 			left: (100vw - 100vw/$items)/2;
-			@include transition(transform 0.6s, opacity 0s, left 0.4s);
+			transition: transform 0.6s, opacity 0s, left 0.4s;
 		}
 
 		p {
@@ -319,18 +323,19 @@ Main Components
 	padding: 4em 0;
 	cursor: auto;
 	background-color: $color-1;
-	color: lighten($color-3, 30%);
-	@include transition(opacity 0.4s 0s, visibility 0s 0.4s);
+	color: lighten(#000, 30%);
+	transition: (opacity 0.4s 0s, visibility 0s 0.4s);
 
 	.is-full-width & {
 		visibility: visible;
 		opacity: 1;
 	}
 
-	p {
+	p, img {
+		display: block;
 		width: 90%;
 		max-width: 800px;
-		margin: 0 auto;
+		margin: 0 auto 36px;
 		line-height: 2;
 	}
 
@@ -353,7 +358,7 @@ Main Components
 	white-space: nowrap;
 
 	visibility: hidden;
-	@include transition(transform 1s 0s, visibility 0s 1s);
+	transition: (transform 1s 0s, visibility 0s 1s);
 }
 
 .projects-container .cd-close {
@@ -361,7 +366,7 @@ Main Components
 	top: 30px;
 	right: 5%;
 	background: url('../img/cd-icon-close-mobile.svg') no-repeat center center;
-	@include transform(scale(0));
+	transform: scale(0);
 
 	@include MQ(L) {
 		background-image: url('../img/cd-icon-close-desktop.svg');
@@ -372,7 +377,7 @@ Main Components
 	position: absolute;
 	bottom: 30px;
 	left: 50%;
-	@include transform(translateX(-50%) scale(0));
+	transform: translateX(-50%) scale(0);
 	background: url('../img/cd-icon-arrow-mobile.svg') no-repeat center center;
 
 	@include MQ(L) {
@@ -383,34 +388,34 @@ Main Components
 .project-is-open .cd-close, 
 .project-is-open .cd-scroll {
 	visibility: visible;
-	@include transform(scale(1));
-	@include transition(transform 0.4s 0s, visibility 0s 0s);
+	transform: scale(1);
+	transition: (transform 0.4s 0s, visibility 0s 0s);
 }
 
 .project-is-open .cd-scroll {
-	@include transform(translateX(-50%) scale(1));
-	@include animation(cd-translate 1.2s 0.4s);
-	@include animation-iteration-count(2);
+	transform: translateX(-50%) scale(1);
+	animation: cd-translate 1.2s 0.4s;
+	animation-iteration-count: 2;
 }
 
 .no-touch .project-is-open .cd-close:hover {
-	@include transform(scale(1.2));
+	transform: scale(1.2);
 }
 
 .no-touch .project-is-open .cd-scroll:hover {
-	@include transform(translateX(-50%) scale(1.2));
+	transform: translateX(-50%) scale(1.2);
 }
 
-@include keyframes(cd-translate) {
+@keyframes cd-translate {
 	0% {
-		@include transform(translateX(-50%) scale(1));
+		transform: translateX(-50%) scale(1);
 	}
 
 	50% {
-		@include transform(translateY(10px) translateX(-50%) scale(1));
+		transform: translateY(10px) translateX(-50%) scale(1);
 	}
 
 	100% {
-		@include transform(translateX(-50%) scale(1));
+		transform: translateX(-50%) scale(1);
 	}
 }
